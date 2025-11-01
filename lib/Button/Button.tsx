@@ -1,13 +1,6 @@
-import {
-  forwardRef,
-  type ReactNode,
-  type ButtonHTMLAttributes,
-  type ElementType,
-  type MouseEvent,
-  isValidElement,
-  cloneElement,
-} from "react";
+import { forwardRef, type ReactNode, type ButtonHTMLAttributes, type ElementType, type MouseEvent } from "react";
 import clsx from "clsx";
+import { normalizeIcon } from "../utils/normalizeIcon";
 
 type Intent = "primary" | "secondary" | "ghost" | "danger" | "outline" | "subtle";
 type Size = "xs" | "sm" | "md" | "lg";
@@ -58,29 +51,6 @@ const shapeStyles: Record<Shape, string> = {
   square: "rounded-none",
 };
 
-interface IconElementProps {
-  className?: string;
-  width?: number;
-  height?: number;
-  focusable?: string;
-  ["aria-hidden"]?: boolean;
-}
-
-function normalizeIcon(node: ReactNode, size: number | undefined, extraClass: string) {
-  if (!node) return null;
-  if (isValidElement<IconElementProps>(node)) {
-    const next: Partial<IconElementProps> = {
-      className: clsx(node.props.className, extraClass),
-      "aria-hidden": node.props["aria-hidden"] ?? true,
-    };
-    if (size && node.props.width == null) next.width = size;
-    if (size && node.props.height == null) next.height = size;
-    if (node.type === "svg") next.focusable = "false";
-    return cloneElement(node, next);
-  }
-  return <span className={extraClass}>{node}</span>;
-}
-
 export const Button = forwardRef<HTMLElement, ButtonProps>(
   (
     {
@@ -115,21 +85,6 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(
       <span className="inline-flex shrink-0 ml-2">{normalizeIcon(endIcon, iconSize, "inline-block")}</span>
     ) : null;
 
-    const spinner = loadingIcon ? (
-      normalizeIcon(loadingIcon, iconSize ?? 16, "animate-spin")
-    ) : (
-      <svg
-        className="animate-spin h-4 w-4 text-current"
-        viewBox="0 0 24 24"
-        fill="none"
-        role="img"
-        aria-label="Loading"
-      >
-        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-      </svg>
-    );
-
     return (
       <Component
         ref={ref}
@@ -161,9 +116,9 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(
       >
         {start}
         <span className={loading ? "opacity-0" : "inline-block"}>{children}</span>
-        {loading && (
+        {loading && loadingIcon && (
           <span className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
-            {spinner}
+            {normalizeIcon(loadingIcon, iconSize ?? 16, "animate-spin")}
           </span>
         )}
         {end}

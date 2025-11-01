@@ -107,13 +107,6 @@ export const WithIcons: Story = {
   },
 };
 
-export const Loading: Story = {
-  args: {
-    loading: true,
-    children: "Loading...",
-  },
-};
-
 export const Disabled: Story = {
   args: {
     disabled: true,

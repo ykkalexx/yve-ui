@@ -20,16 +20,6 @@ describe(`Component: ${Button.displayName}`, () => {
     expect(btn).toHaveAttribute("data-shape", "rounded");
   });
 
-  it("hides content and shows default spinner when loading", () => {
-    render(<Button loading>Load</Button>);
-    const btn = screen.getByRole("button");
-    expect(btn).toHaveAttribute("aria-busy", "true");
-    const hiddenSpan = btn.querySelector("span.opacity-0");
-    expect(hiddenSpan).not.toBeNull();
-    const spinner = btn.querySelector("svg.animate-spin");
-    expect(spinner).not.toBeNull();
-  });
-
   it("uses custom loadingIcon when provided", () => {
     const custom = <svg data-testid="custom" />;
     render(
