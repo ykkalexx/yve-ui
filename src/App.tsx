@@ -1,4 +1,4 @@
-import { Button } from "yve-ui";
+import { Button } from "../lib/main";
 
 function App() {
   return (
