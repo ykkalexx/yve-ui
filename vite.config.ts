@@ -46,7 +46,19 @@ export default defineConfig({
     },
   },
   test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: ["lib/Tests/setup.ts"],
+    css: true,
     projects: [
+      {
+        extends: true,
+        test: {
+          name: "unit",
+          include: ["lib/**/*.test.{ts,tsx}"],
+          exclude: ["**/*.stories.test.{ts,tsx}", "node_modules/**/*"],
+        },
+      },
       {
         extends: true,
         plugins: [
