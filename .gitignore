@@ -26,3 +26,6 @@ dist-ssr
 .DS_Store
 *storybook.log
 storybook-static
+
+coverage/
+.nyc_output/
