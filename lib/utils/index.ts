@@ -1,0 +1,1 @@
+export { normalizeIcon } from "./normalizeIcon";
