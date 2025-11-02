@@ -50,6 +50,26 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: ["lib/Tests/setup.ts"],
     css: true,
+    coverage: {
+      provider: "v8",
+      reporter: ["text", "json", "html", "lcov"],
+      exclude: [
+        "node_modules/",
+        "dist/",
+        "**/*.stories.tsx",
+        "**/*.test.tsx",
+        "**/*.config.{js,ts}",
+        ".storybook/",
+        "lib/Tests/",
+        "lib/main.ts",
+      ],
+      thresholds: {
+        lines: 80,
+        functions: 80,
+        branches: 60,
+        statements: 80,
+      },
+    },
     projects: [
       {
         extends: true,

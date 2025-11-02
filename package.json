@@ -26,6 +26,9 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "vitest",
+    "test:unit": "vitest --project=unit",
+    "test:unit:coverage": "vitest run --coverage --project=unit",
+    "test:storybook": "vitest --project=storybook",
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
