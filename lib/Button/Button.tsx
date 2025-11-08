@@ -1,10 +1,9 @@
 import { forwardRef, type ReactNode, type ButtonHTMLAttributes, type ElementType, type MouseEvent } from "react";
 import clsx from "clsx";
 import { normalizeIcon } from "../utils/normalizeIcon";
+import { shapeStyles, sizeStyles, type Shape, type Size } from "../shared";
 
-type Intent = "primary" | "secondary" | "ghost" | "danger" | "outline" | "subtle";
-type Size = "xs" | "sm" | "md" | "lg";
-type Shape = "rounded" | "pill" | "square";
+type Intent = "primary" | "secondary" | "ghost" | "danger" | "outline" | "subtle" | "unstyled";
 
 interface BaseProps {
   children: ReactNode;
@@ -36,19 +35,7 @@ const intentStyles: Record<Intent, string> = {
   danger: "bg-red-500 text-white hover:bg-red-600",
   outline: "border border-[#424242] text-[#424242] hover:bg-[#424242] hover:text-white",
   subtle: "bg-gray-50 text-[#424242] hover:bg-gray-100",
-};
-
-const sizeStyles: Record<Size, string> = {
-  xs: "text-[12px] px-2 py-1",
-  sm: "text-[13px] px-3 py-1.5",
-  md: "text-[14px] px-4 py-2",
-  lg: "text-[16px] px-5 py-2.5",
-};
-
-const shapeStyles: Record<Shape, string> = {
-  rounded: "rounded-md",
-  pill: "rounded-full",
-  square: "rounded-none",
+  unstyled: "",
 };
 
 export const Button = forwardRef<HTMLElement, ButtonProps>(
@@ -91,7 +78,8 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(
         href={Component === "a" ? href : undefined}
         type={Component === "button" ? type : undefined}
         className={clsx(
-          "relative inline-flex items-center justify-center font-light px-6 py-3 select-none transition-all duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-60",
+          intent !== "unstyled" &&
+            "relative inline-flex items-center justify-center font-light px-6 py-3 select-none transition-all duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-60",
           intentStyles[intent],
           sizeStyles[size],
           shapeStyles[shape],
