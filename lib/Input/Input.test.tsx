@@ -71,6 +71,15 @@ describe(`Component: ${Input.displayName}`, () => {
       expect(svg).toHaveAttribute("width", "24");
       expect(svg).toHaveAttribute("height", "24");
     });
+
+    it("normalizes endIcon size when iconSize specified", () => {
+      const icon = <svg viewBox="0 0 10 10" data-testid="end-sized-icon" />;
+      render(<Input endIcon={icon} iconSize={20} placeholder="End icon size" />);
+      const wrapper = screen.getByPlaceholderText("End icon size").parentElement;
+      const svg = wrapper?.querySelector("svg");
+      expect(svg).toHaveAttribute("width", "20");
+      expect(svg).toHaveAttribute("height", "20");
+    });
   });
 
   describe("Input Types", () => {
