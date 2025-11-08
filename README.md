@@ -1,1 +1,1 @@
-Modern and sleek react UI component library build with TailwindCSS on top of Radix
+Modern and sleek react UI component library build with TailwindCSS and some Radix
