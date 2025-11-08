@@ -1,5 +1,5 @@
 import "./index.css";
-export * from "./Button";
-export * from "./Input";
+export * from "./button";
+export * from "./input";
 export * from "./utils";
 export * from "./shared";

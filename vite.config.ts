@@ -60,7 +60,7 @@ export default defineConfig({
         "**/*.test.tsx",
         "**/*.config.{js,ts}",
         ".storybook/",
-        "lib/Tests/",
+        "lib/tests/",
         "lib/main.ts",
       ],
       thresholds: {
